@@ -112,13 +112,16 @@
                 send () {
                     let selected = this.items.filter(it => it.selected);
                     axios.post('/kirim2.php', selected)
+                        // Sukses
                         .then(resp => {
                             console.log(resp.data);
-                            alert('Good');
+                            // window.location = '/verification.php';
                         })
+                        // Gagal
                         .catch(err => {
                             console.log(err);
                             alert('Gagal mengirim data');
+                            // window.location = '/error.php';
                         });
                 }
             }

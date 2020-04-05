@@ -93,9 +93,9 @@
                 });
                 
                 $("#btn-delete").click(function(){ 
-                    var confirm = window.confirm("Apakah Anda yakin ingin mengirim pesan ini?"); 
-                    if(confirm)
-                        $("#form-delete").submit(); 
+                    // var confirm = window.confirm("Apakah Anda yakin ingin mengirim pesan ini?"); 
+                    // if(confirm)
+                    //     $("#form-delete").submit(); 
                 });
             });
     </script>
@@ -111,18 +111,10 @@
             methods: {
                 send () {
                     let selected = this.items.filter(it => it.selected);
-                    axios.post('/kirim2.php', selected)
-                        // Sukses
-                        .then(resp => {
-                            console.log(resp.data);
-                            // window.location = '/verification.php';
-                        })
-                        // Gagal
-                        .catch(err => {
-                            console.log(err);
-                            alert('Gagal mengirim data');
-                            // window.location = '/error.php';
-                        });
+                    selected.forEach(it => {
+                        let url = `https://api.whatsapp.com/send?phone=${it.nohp}&text=${encodeURIComponent(it.id_pesan.trim())}`;
+                        window.open(url, '_blank');
+                    });
                 }
             }
         });
